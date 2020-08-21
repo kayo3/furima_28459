@@ -18,11 +18,12 @@ class Item < ApplicationRecord
     validates :days_until_shipping_id
   end
   PRICE_REGEX =  /\A[0-9]+\z/
-  with_options presence: true do
+  with_options presence: true do #prisense: true で弾かれてしまうとその後記述したエラー文は適用されないので注意。
+  validates :image
   validates :name
   validates :item_description
-  validates :price,
-            format: {with: PRICE_REGEX, message: "Half-width number"}
+  validates :price
   end
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range" } 
+  validates :price, numericality: { with: PRICE_REGEX, message: "Half-width number" }
 end
