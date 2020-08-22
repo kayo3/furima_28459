@@ -136,9 +136,9 @@
             <% end %>
   
             <% if item.order.present? %> 
-            <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
             <% end %>
   
           </div>
@@ -158,7 +158,6 @@
       </li>
     <% end %>
 
-      <%# 商品がない場合のダミー %>
   <% else %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -178,7 +177,6 @@
         <% end %>
       </li>
   <% end %>
-      <%# //商品がない場合のダミー %>
     </ul>
   </div>
   <%# //商品一覧 %>
