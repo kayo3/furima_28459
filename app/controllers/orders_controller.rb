@@ -7,5 +7,17 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @perchase = OrderDelivery.new(perchase_params)
+    if @perchase.save
+      redirect_to root_path
+    else
+      render :index
+    end
+  end
+
+private
+
+  def perchase_params
+    params.permit(:item_id, :postal_code, :prefecture_id, :city, :block, :building, :tel_number,:order_id).merge(user_id: current_user.id)
   end
 end
