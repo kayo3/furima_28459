@@ -8,23 +8,17 @@ const pay = () => {
     const formData = new FormData(formResult);
 
     const card = {
-      number: formData.get("number"),
-      cvc: formData.get("cvc"),
-      exp_month: formData.get("exp_month"),
-      exp_year: `20${formData.get("exp_year")}`,
+      number: formData.get("order_delivery[number]"),
+      cvc: formData.get("order_delivery[cvc]"),
+      exp_month: formData.get("order_delivery[exp_month]"),
+      exp_year: `20${formData.get("order_delivery[exp_year]")}`,
     };
-    // console.log(card)
 
     Payjp.createToken(card, (status, response) => {
-    // console.log(status)
-    // console.log(response)
-    // console.log(Payjp)
-    // console.log(card)
       if (status === 200) {
-        const token = response.id;
-        debugger
+        const token = response.id; // responseはPayjpからの戻り値で、responseの中のidがtoken
         const renderDom = document.getElementById("charge-form");
-        const tokenObj = `<input value=${token} type="hidden" name='token'>`;
+        const tokenObj = `<input value=${token} type="hidden" name='order_delivery[token]'>`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
 
         document.getElementById("card-number").removeAttribute("name");
@@ -35,6 +29,7 @@ const pay = () => {
         document.getElementById("charge-form").submit();
         document.getElementById("charge-form").reset();
       } else {
+        document.getElementById("charge-form").submit(); //エラーメッセージをレンダリングする為、status === 200以外でもsubmitさせる
       }
     });
   });
