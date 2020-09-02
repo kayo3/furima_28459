@@ -13,13 +13,13 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates :last_name, :first_name, 
-              format: { with: NAME_REGEX, message:'Full-width characters' }
+              format: { with: NAME_REGEX, message:'は全角（漢字・ひらがな・カタカナ）で入力して下さい' }
     validates :last_name_kana, :first_name_kana,
-              format: { with: KANA_REGEX, message:'Full-width katakana characters' }
+              format: { with: KANA_REGEX, message:'は全角カタカナで入力して下さい'}
     validates :birthday
   end
   validates :email,
-              format: { with: EMAIL_REGEX, message:'Include @'}
+              format: { with: EMAIL_REGEX, message:'は「＠」必須です'}
   validates :password, :password_confirmation, confirmation: true,
-            format: { with: PASSWORD_REGEX, message:'Include both letters and numbers' }
+            format: { with: PASSWORD_REGEX, message:'は半角英数字混合で入力して下さい' }
 end

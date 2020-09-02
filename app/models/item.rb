@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   #バリデーションの設定
   #空の投稿を保存できないようにする
   #ジャンルの選択が「--」の時は保存できないようにする
-  with_options presence: true, numericality: { other_than: 1, message: "Select"} do
+  with_options presence: true, numericality: { other_than: 1, message: "を選択して下さい"} do
     validates :category_id
     validates :status_id
     validates :delivery_fee_id
@@ -25,6 +25,6 @@ class Item < ApplicationRecord
   validates :item_description
   validates :price
   end
-  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range" } 
-  validates :price, numericality: { with: PRICE_REGEX, message: "Half-width number" }
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は300円以上9999999円以下に設定して下さい" } 
+  validates :price, numericality: { with: PRICE_REGEX, message: "は半角数字で入力して下さい" }
 end
