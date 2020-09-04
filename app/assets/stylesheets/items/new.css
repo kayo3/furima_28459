@@ -89,6 +89,11 @@
   margin-bottom: 15px;
 }
 
+.uploaded_box {
+  display: flex;
+  justify-content: center;
+}
+
 .uploaded_img {
   width: 50%;
   height: auto;
